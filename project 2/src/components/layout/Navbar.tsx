@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { MessageSquare, Menu, X } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
 const Navbar: React.FC = () => {
@@ -13,8 +12,29 @@ const Navbar: React.FC = () => {
   };
 
   const isActive = (path: string) => {
-    return location.pathname === path ? 'text-blue-700 font-medium' : 'text-gray-700 hover:text-blue-600';
+    return location.pathname === path
+      ? 'text-blue-700 font-medium'
+      : 'text-gray-700 hover:text-blue-600';
   };
+
+  // Icônes SVG de remplacement
+  const MessageSquare = () => (
+    <svg className="h-8 w-8 text-blue-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 1.657-1.343 3-3 3H7l-4 4V5c0-1.657 1.343-3 3-3h12c1.657 0 3 1.343 3 3v7z" />
+    </svg>
+  );
+
+  const MenuIcon = () => (
+    <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  );
+
+  const CloseIcon = () => (
+    <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  );
 
   return (
     <nav className="bg-white shadow-sm">
@@ -22,7 +42,7 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
-              <MessageSquare className="h-8 w-8 text-blue-600" />
+              <MessageSquare />
               <span className="text-xl font-bold text-gray-900">AlertBot</span>
             </Link>
           </div>
@@ -40,7 +60,7 @@ const Navbar: React.FC = () => {
                 <Link to="/dashboard" className={`${isActive('/dashboard')} transition duration-150`}>
                   Tableau de bord
                 </Link>
-                <button 
+                <button
                   onClick={logout}
                   className="text-gray-700 hover:text-blue-600 transition duration-150"
                 >
@@ -52,8 +72,8 @@ const Navbar: React.FC = () => {
                 <Link to="/login" className={`${isActive('/login')} transition duration-150`}>
                   Connexion
                 </Link>
-                <Link 
-                  to="/register" 
+                <Link
+                  to="/register"
                   className="bg-blue-600 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-700 transition duration-150"
                 >
                   S'inscrire
@@ -68,11 +88,7 @@ const Navbar: React.FC = () => {
               onClick={toggleMenu}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
             >
-              {isMenuOpen ? (
-                <X className="block h-6 w-6" />
-              ) : (
-                <Menu className="block h-6 w-6" />
-              )}
+              {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
             </button>
           </div>
         </div>
