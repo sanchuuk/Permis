@@ -5,6 +5,6 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
-    include: ['lucide-react'], // ✅ On force Vite à optimiser lucide-react
+    include: ['lucide-react'], // ✅ forcer l’inclusion de lucide-react
   },
 });
